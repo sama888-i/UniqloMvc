@@ -12,12 +12,13 @@ namespace Uniqlo2.DataAccsess
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<ProductRating> ProductRatings { get; set; }
         public DbSet<ProductComment> ProductComments{ get; set; }
+        public DbSet<BasketProduct> BasketProducts { get; set; }
+        public DbSet<Basket> UsersBasket { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public UniqloDbContext(DbContextOptions opt) : base(opt) { }
+
         
-        
-            
-        
+
 
     }
 }

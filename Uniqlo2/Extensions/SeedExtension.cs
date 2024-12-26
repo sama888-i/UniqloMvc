@@ -6,8 +6,8 @@ namespace Uniqlo2.Extensions
 {
     public static class SeedExtension
     {
-        public static void UseUserSeed(this IApplicationBuilder app)
-        {
+        public static async void UseUserSeed(this IApplicationBuilder app)
+        {   
             using (var scope = app.ApplicationServices.CreateScope())
             {
                var userManager= scope.ServiceProvider.GetRequiredService<UserManager<User>>();
@@ -26,7 +26,9 @@ namespace Uniqlo2.Extensions
                         FullName = "admin",
                         UserName = "admin",
                         Email = "admin@gmail.com",
-                        ImageUrl = "photo.jpg"
+                        ImageUrl = "photo.jpg",
+                        EmailConfirmed = true
+
                     };
                     userManager.CreateAsync(u, "123").Wait();
                     userManager.AddToRoleAsync(u, nameof(Roles.Admin)).Wait();

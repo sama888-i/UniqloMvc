@@ -190,7 +190,7 @@
                     <!-- Start Single Content -->
                     <div role="tabpanel" id="reviews" class="product__tab__content">
                         <div class="review__address__inner">
-                            @foreach (var item in Model.Comments?.Select(x => x.Comment) ??[] )
+                            @foreach (var item in Model.Comments ?? [] )
                             {
                                 <!-- Start Single Review -->
                                 <div class="pro__review">
@@ -199,7 +199,7 @@
                                     </div>
                                     <div class="review__details">
                                         <div class="review__info">
-                                            <h4><a href="#"></a></h4>
+                                            <h4><a href="#">Salam</a></h4>
                                             <ul class="rating">
                                                 @for (int i = 0; i < Math.Ceiling(rating); i++)
                                                 {
@@ -214,9 +214,9 @@
                                             </div>
                                         </div>
                                         <div class="review__date">
-                                            <span>@Model.CreatedTime</span>
+                                            <span>@item.CreatedTime</span>
                                         </div>
-                                        <p>@Model.Comments</p>
+                                        <p>@item.Comment</p>
                                     </div>
                                 </div>
                             }
@@ -227,22 +227,23 @@
                          <div>
                             <h2 >Write  A review</h2>
                          </div>
-                        <!-- End RAting Area -->
+                        <!-- End Rating Area -->
                         <div class="review__box">
-                            <form id="review-form">
+                            <form id="review-form"asp-action="AddComment"method="get">
                                 <div class="single-review-form">
                                     <div class="review-box name">
-                                        <input type="text"  placeholder="Type your name">
+                                        <input type="hidden" name="productId" value="@Model.Id" />
+                                        <input type="text"  placeholder="Type your name" name="Name">
                                         
                                     </div>
                                 </div>
                                 <div class="single-review-form">
                                     <div class="review-box message">
-                                        <textarea placeholder="Write your review"></textarea>
+                                        <textarea placeholder="Write your review"name="Comment"></textarea>
                                     </div>
                                 </div>
                                 <div class="review-btn">
-                                    <a class="fv-btn" href="#">submit review</a>
+                                    <button type="submit" class="fv-btn">submit review</button>
                                 </div>
                             </form>
                         </div>

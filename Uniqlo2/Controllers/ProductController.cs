@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using System.Security.Claims;
 using Uniqlo2.DataAccsess;
+using Uniqlo2.Models;
+using Uniqlo2.ViewModels.ProductDetails;
 
 namespace Uniqlo2.Controllers
 {
@@ -20,6 +22,7 @@ namespace Uniqlo2.Controllers
                 .Where(x => x.Id == id.Value && !x.IsDeleted)
                 .Include(x => x.Images)
                 .Include(x=>x.Ratings)
+                .Include(x=>x.Comments)
                 .FirstOrDefaultAsync();
             if (data is null) return NotFound();
             ViewBag.Rating = 5;
@@ -53,9 +56,26 @@ namespace Uniqlo2.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Details),new {Id=productId});
         }
-        public async Task<IActionResult> Comment()
+        
+        public async Task<IActionResult> AddComment(ProductCommentVM vm,int productId)
         {
-            return View();
+            string userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)!.Value;
+
+            var data = await _context.ProductComments.Where(x => x.UserId == userId && x.ProductId == productId).FirstOrDefaultAsync();
+
+
+            ProductComment comment = new ProductComment
+            {
+                UserId=userId,
+                ProductId=productId,
+                Comment = vm.Comment,
+            };
+
+
+            await _context.ProductComments.AddAsync(comment);
+
+             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Details),new {Id=productId});
         }
     }
 }

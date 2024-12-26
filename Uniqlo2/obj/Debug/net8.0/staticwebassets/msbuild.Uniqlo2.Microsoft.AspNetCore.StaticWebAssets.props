@@ -12,8 +12,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>r3unjvhb45</Fingerprint>
-      <Integrity>J5dGj92SnlF6l8eu8eBs7xu1fQ3QYJP8CE8hAmqkGlE=</Integrity>
+      <Fingerprint>507r0ffam7</Fingerprint>
+      <Integrity>y5eqwg7zjJ7u5GJ+jKkeATY8WcWejAbhkpBgbXsvEfY=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\admin\css\sb-admin-2.css'))</OriginalItemSpec>
@@ -35,6 +35,42 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\admin\css\sb-admin-2.min.css'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\admin\img\Log+in.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Uniqlo2</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Uniqlo2</BasePath>
+      <RelativePath>admin/img/Log+in.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>tulzfr8nxz</Fingerprint>
+      <Integrity>ZVTWnbd64uxT5YdXdhubi/PeADoLNWXL84FX4z7FnG0=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\admin\img\Log+in.png'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\admin\img\no-looking.gif'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Uniqlo2</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Uniqlo2</BasePath>
+      <RelativePath>admin/img/no-looking.gif</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>rtev56ebvt</Fingerprint>
+      <Integrity>z/lY7kcA8MwmybYiP/ynXXVd2DlpUNBji50NWGJMOfo=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\admin\img\no-looking.gif'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\admin\img\undraw_posting_photo.svg'))">
       <SourceType>Package</SourceType>
@@ -37470,8 +37506,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>bmh5i85g76</Fingerprint>
-      <Integrity>jVU7wOyTxYa/QqYxMSGlxhyswyQQ6DpqxGGwdOMxPJg=</Integrity>
+      <Fingerprint>wpny36wsm4</Fingerprint>
+      <Integrity>bJjjNq/DyWKCJ8BotAG6k+BeTOM+65Zr9M4h+zWLaHs=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\style.css'))</OriginalItemSpec>

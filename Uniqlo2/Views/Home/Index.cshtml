@@ -4,7 +4,9 @@
     ViewData["Title"] = "Ana səhifə";
 
 }
-
+@section styles{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
 
 <!-- Start Slider Area -->
 <div class="slider__container slider--four">
@@ -147,14 +149,12 @@
                                         <div class="product__inner">
                                             <div class="pro__thumb">
                                                 <a asp-action="Details" asp-controller="Product" asp-route-id="@item.Id">
-                                                    <img width ="100px"src="~/imgs/products/@item.ImageUrl" alt="product images">
+                                                    <img width ="240px"src="~/imgs/products/@item.ImageUrl" alt="product images">
                                                 </a>
                                             </div>
                                             <div class="popular__product__hover__info">
                                                 <ul class="product__action">
-                                                    <li><a title="Add To Wishlist" href="wishlist.html"><span class="ti-heart"></span></a></li>
-                                                    <li><a data-bs-toggle="modal" data-bs-target="#productModal" title="Quick View" class="quick-view modal-view detail-link" href="#"><span class="ti-plus"></span></a></li>
-                                                    <li><a title="Add To Cart" href="cart.html"><span class="ti-shopping-cart"></span></a></li>
+                                                    <li prod-id="@item.Id" style="color:red;cursor:pointer"class="add-cart"><span class="ti-shopping-cart"></span></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -190,4 +190,45 @@
               
     </div>
 </div> 
+@section scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $('.add-cart').click(function(){
+            fetch('/Basket/AddBasket/'+$(this).attr('prod-id'))
+            .then(x=>{
+                if(x.ok)
+                {
+                   Command: toastr["success"]("Mehsul sebete elave olundu")
+                   toastr.options = {
+                     "closeButton": false,
+                     "debug": false,
+                     "newestOnTop": false,
+                     "progressBar": false,
+                     "positionClass": "toast-top-right",
+                     "preventDuplicates": false,
+                     "onclick": null,
+                     "showDuration": "300",
+                     "hideDuration": "1000",
+                     "timeOut": "3000",
+                     "extendedTimeOut": "1000",
+                     "showEasing": "swing",
+                     "hideEasing": "linear",
+                     "showMethod": "fadeIn",
+                     "hideMethod": "fadeOut"
+                   }
+                    fetch('/Basket/GetBasket/')
+                        .then(x=>x.text())
+                        .then(x=>{
+                            $('.shopping_cart').html(x);
+                        });
+        
+
+                }
+            })
+
+        })
+
+    </script>
+
+}
         

@@ -6,6 +6,7 @@ using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.Extensions.Options;
 using Microsoft.VisualBasic;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
@@ -17,7 +18,7 @@ using Uniqlo2.ViewModels.Auths;
 
 namespace Uniqlo2.Controllers
 {
-    public class AccountController(UserManager<User> _userManager,SignInManager<User> _signInManager ,IOptions<SmtpOptions> opts,IEmailService _service) : Controller
+    public class AccountController(UserManager<User> _userManager,SignInManager<User> _signInManager ,IEmailService _service) : Controller
     {
        
         bool isAuthenticated => User.Identity?.IsAuthenticated ?? false;
@@ -36,7 +37,10 @@ namespace Uniqlo2.Controllers
                 Email=vm.Email ,
                 FullName =vm.Fullname ,
                 UserName =vm.Username ,
-                ImageUrl="photo.jpg" //@*ProfilImageUrl*@
+                ImageUrl="photo.jpg" ,//@*ProfilImageUrl*@,
+                
+                
+                
 
             };
             var result = await _userManager.CreateAsync(user,vm.Password );
@@ -60,10 +64,10 @@ namespace Uniqlo2.Controllers
 
             }
             string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            _service.SendEmailconfirmation(user.Email, user.UserName, token);
+            _service.SendEmailConfirmation(user.Email, user.UserName, token);
             return Content("Email sent!");
         }
-        public async Task<IActionResult> Login()
+        public async Task <IActionResult> Login()
         {
             return View();
         }
@@ -91,7 +95,7 @@ namespace Uniqlo2.Controllers
             if(!result.Succeeded)
             {
                 if(result.IsNotAllowed)
-                    ModelState.AddModelError("", "Username or Password is wrong");
+                    ModelState.AddModelError("", "You must confirm your account");
                 if(result.IsLockedOut)
                     ModelState.AddModelError("", "Wait untill" + user.LockoutEnd!.Value.ToString("yyyy-MM-dd HH:mm:ss"));
                 return View();
@@ -115,15 +119,16 @@ namespace Uniqlo2.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(Login));
         }
-        public async Task<IActionResult> VerifyEmail(string token,string user)
+
+        public async Task<IActionResult> VerifyEmail(string token, string user)
         {
             var entity = await _userManager.FindByNameAsync(user);
             if (entity is null) return BadRequest();
-            var result= await _userManager.ConfirmEmailAsync(entity, token);
-            if (result.Succeeded)
+            var result = await _userManager.ConfirmEmailAsync(entity, token.Replace(' ', '+'));
+            if (!result.Succeeded)
             {
                 StringBuilder sb = new StringBuilder();
-                foreach(var item in token)
+                foreach (var item in token)
                 {
                     sb.AppendLine(item.ToString());
 
@@ -131,8 +136,25 @@ namespace Uniqlo2.Controllers
                 return Content(sb.ToString());
             }
             await _signInManager.SignInAsync(entity, true);
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
+        public async Task<IActionResult> ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordVM vm)
+        {
+            var user = await _userManager.FindByEmailAsync(vm.Email);
+            if(user!=null && await _userManager.IsEmailConfirmedAsync(user))
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var passwordResetLink = Url.Action("ResetPassword", "Account", new { email = vm.Email, token = token }, Request.Scheme);
+               
+            }
+            return View();
+        }
+        
             
     }
 }

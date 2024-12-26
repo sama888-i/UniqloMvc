@@ -37,13 +37,20 @@ namespace Uniqlo2
 
             builder.Services.ConfigureApplicationCookie(x =>
             {
-                x.AccessDeniedPath = "/Home/AccessDenied/";
-                
+                x.AccessDeniedPath = "/Home/AccessDenied/";                
 
             });
+           // builder.Services.AddSession(); 
             var app = builder.Build();
+            if(!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
+            app.UseRouting();         
             app.UseStaticFiles();
             app.UseUserSeed();
+            app.UseAuthorization();
+           // app.UseSession();
             app.MapControllerRoute(name: "register",
                 pattern: "register",
                 defaults: new { controller = "Account", action = "Register" });
@@ -53,6 +60,7 @@ namespace Uniqlo2
              pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
 
             app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            app.MapControllerRoute("default", "{controller=Basket}/{action=Index}/{id?}");
 
             app.Run();
         }

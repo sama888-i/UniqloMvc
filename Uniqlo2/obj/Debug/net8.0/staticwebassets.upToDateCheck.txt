@@ -1,5 +1,7 @@
 wwwroot\admin\css\sb-admin-2.css
 wwwroot\admin\css\sb-admin-2.min.css
+wwwroot\admin\img\Log+in.png
+wwwroot\admin\img\no-looking.gif
 wwwroot\admin\img\undraw_posting_photo.svg
 wwwroot\admin\img\undraw_profile.svg
 wwwroot\admin\img\undraw_profile_1.svg

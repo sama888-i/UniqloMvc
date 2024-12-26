@@ -12,8 +12,8 @@ using Uniqlo2.DataAccsess;
 namespace Uniqlo2.Migrations
 {
     [DbContext(typeof(UniqloDbContext))]
-    [Migration("20241209230315_CreatedProductCommentsatble")]
-    partial class CreatedProductCommentsatble
+    [Migration("20241215162454_CreatedUsersBasketTable")]
+    partial class CreatedUsersBasketTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -173,6 +173,32 @@ namespace Uniqlo2.Migrations
                     b.ToTable("ProductTag");
                 });
 
+            modelBuilder.Entity("Uniqlo2.Models.Basket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UsersBasket");
+                });
+
             modelBuilder.Entity("Uniqlo2.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -256,12 +282,6 @@ namespace Uniqlo2.Migrations
                     b.Property<string>("Comment")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
-
-                    b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
@@ -528,6 +548,21 @@ namespace Uniqlo2.Migrations
                         .HasForeignKey("TagsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Uniqlo2.Models.Basket", b =>
+                {
+                    b.HasOne("Uniqlo2.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("Uniqlo2.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Uniqlo2.Models.Product", b =>

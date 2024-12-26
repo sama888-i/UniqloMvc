@@ -2,9 +2,8 @@
 
 namespace Uniqlo2.Models
 {
-    public class ProductComment:BaseEntity 
+    public class ProductComment : BaseEntity
     {
-     
         [MaxLength(500)]
         public string? Comment { get; set; }
         public int? ProductId { get; set; }

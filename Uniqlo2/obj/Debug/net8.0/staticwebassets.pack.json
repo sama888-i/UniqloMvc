@@ -9,6 +9,14 @@
       "PackagePath": "staticwebassets\\admin\\css\\sb-admin-2.min.css"
     },
     {
+      "Id": "C:\\Users\\Asus\\source\\repos\\Uniqlo2\\Uniqlo2\\wwwroot\\admin\\img\\Log+in.png",
+      "PackagePath": "staticwebassets\\admin\\img\\Log+in.png"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\source\\repos\\Uniqlo2\\Uniqlo2\\wwwroot\\admin\\img\\no-looking.gif",
+      "PackagePath": "staticwebassets\\admin\\img\\no-looking.gif"
+    },
+    {
       "Id": "C:\\Users\\Asus\\source\\repos\\Uniqlo2\\Uniqlo2\\wwwroot\\admin\\img\\undraw_posting_photo.svg",
       "PackagePath": "staticwebassets\\admin\\img\\undraw_posting_photo.svg"
     },

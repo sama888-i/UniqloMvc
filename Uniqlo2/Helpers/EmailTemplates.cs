@@ -1,4 +1,20 @@
-﻿namespace Uniqlo2.Helpers
+﻿using Azure.Core;
+using Humanizer;
+using Microsoft.AspNetCore.Components.Routing;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.CodeAnalysis.Elfie.Serialization;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using static System.Net.Mime.MediaTypeNames;
+using System.Drawing.Printing;
+using System.Drawing;
+using System.IO;
+using System;
+using Uniqlo2.Models;
+
+namespace Uniqlo2.Helpers
 {
     public class EmailTemplates
     {
@@ -520,5 +536,6 @@
 </body>
 </html>
 """;
-    }
+
+}
 }

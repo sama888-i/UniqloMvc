@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Uniqlo2.Migrations
 {
     /// <inheritdoc />
-    public partial class CreatedProductCommentsatble : Migration
+    public partial class CreatedProductCommentsTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -43,9 +42,7 @@ namespace Uniqlo2.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Comment = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     ProductId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {

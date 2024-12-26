@@ -170,6 +170,52 @@ namespace Uniqlo2.Migrations
                     b.ToTable("ProductTag");
                 });
 
+            modelBuilder.Entity("Uniqlo2.Models.Basket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
+
+                    b.ToTable("UsersBasket");
+                });
+
+            modelBuilder.Entity("Uniqlo2.Models.BasketProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BasketId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BasketId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("BasketProducts");
+                });
+
             modelBuilder.Entity("Uniqlo2.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -527,6 +573,30 @@ namespace Uniqlo2.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Uniqlo2.Models.Basket", b =>
+                {
+                    b.HasOne("Uniqlo2.Models.User", "User")
+                        .WithOne("Basket")
+                        .HasForeignKey("Uniqlo2.Models.Basket", "UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Uniqlo2.Models.BasketProduct", b =>
+                {
+                    b.HasOne("Uniqlo2.Models.Basket", "Basket")
+                        .WithMany("BasketProducts")
+                        .HasForeignKey("BasketId");
+
+                    b.HasOne("Uniqlo2.Models.Product", "Product")
+                        .WithMany("BasketProducts")
+                        .HasForeignKey("ProductId");
+
+                    b.Navigation("Basket");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Uniqlo2.Models.Product", b =>
                 {
                     b.HasOne("Uniqlo2.Models.Category", "Category")
@@ -577,6 +647,11 @@ namespace Uniqlo2.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Uniqlo2.Models.Basket", b =>
+                {
+                    b.Navigation("BasketProducts");
+                });
+
             modelBuilder.Entity("Uniqlo2.Models.Category", b =>
                 {
                     b.Navigation("Products");
@@ -584,11 +659,18 @@ namespace Uniqlo2.Migrations
 
             modelBuilder.Entity("Uniqlo2.Models.Product", b =>
                 {
+                    b.Navigation("BasketProducts");
+
                     b.Navigation("Comments");
 
                     b.Navigation("Images");
 
                     b.Navigation("Ratings");
+                });
+
+            modelBuilder.Entity("Uniqlo2.Models.User", b =>
+                {
+                    b.Navigation("Basket");
                 });
 #pragma warning restore 612, 618
         }
